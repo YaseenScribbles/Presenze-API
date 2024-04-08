@@ -36,10 +36,10 @@ class CheckInController extends Controller
                 'created_at' => Carbon::now()
             ]);
 
-            return response()->json(['message', 'Checked in successful'], 200);
+            return response()->json(['message' => 'Checked in successful'], 200);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json(['error', $th->getMessage()], 400);
+            return response()->json(['error' => $th->getMessage()], 400);
         }
     }
 
