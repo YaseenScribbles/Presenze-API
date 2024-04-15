@@ -4,27 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+
 
 class AuthController extends Controller
 {
     public function login(Request $request){
 
-        try {
-            //code...
-            $request->validate([
-                'email' => 'required|email|exists:users,email',
-                'password' => 'required'
-            ]);
-        } catch (\Throwable $th) {
-            //throw $th;
-            Log::error($th->getMessage());
-        }
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required'
+        ]);
 
         $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)){
-            return response()->json(['message' => 'Login success','user' => Auth::user()]);
+            return response()->json(['message' => 'Login successful','user' => Auth::user()]);
         } else {
             return response()->json(['message' => 'Login failed'],401);
         }
@@ -33,6 +27,7 @@ class AuthController extends Controller
 
     public function logout( Request $request ){
         Auth::logout($request->user());
+        return response()->json(['message' => 'Logout successful']);
     }
 
 }
