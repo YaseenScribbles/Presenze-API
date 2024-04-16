@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)){
-            return response()->json(['message' => 'Login successful','user' => Auth::user()]);
+            return response()->json(['message' => 'Login successful','user' => new UserResource(Auth::user())]);
         } else {
             return response()->json(['message' => 'Login failed'],401);
         }
