@@ -6,15 +6,18 @@ use App\Models\CheckIn;
 use App\Http\Requests\StoreCheckInRequest;
 use App\Http\Requests\UpdateCheckInRequest;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CheckInController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user_id = $request->query('user_id');
+        $checkins = CheckIn::where('user_id',$user_id);
+        return response()->json($checkins,200);
     }
 
     /**
