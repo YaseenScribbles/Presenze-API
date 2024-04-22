@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCheckInRequest;
 use App\Http\Requests\UpdateCheckInRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CheckInController extends Controller
 {
@@ -16,8 +17,10 @@ class CheckInController extends Controller
     public function index(Request $request)
     {
         $user_id = $request->query('user_id');
-        $checkins = CheckIn::where('user_id',$user_id);
-        return response()->json($checkins,200);
+        $checkins = CheckIn::where('user_id','=',$user_id)
+        ->orderBy('created_at','desc')
+        ->get();
+        return response()->json([$checkins],200);
     }
 
     /**
