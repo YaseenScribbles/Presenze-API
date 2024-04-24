@@ -36,7 +36,7 @@ class CheckInController extends Controller
             $path =  $image->store('images', 'public');
 
             CheckIn::create([
-                'user_id' => 1,
+                'user_id' => $data['user_id'],
                 'location' => $data['location'],
                 'image_path' => $path,
                 'created_at' => Carbon::now()
