@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('check_in', function (Blueprint $table) {
+        Schema::create('check_out', function (Blueprint $table) {
             $table->integer('user_id');
-            $table->longText('image_path',100);
-            $table->longText('location',50);
+            $table->longText('image_path');
+            $table->longText('location');
             $table->dateTime('created_at');
             $table->boolean('is_active')->default(true);
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('check_in');
+        Schema::dropIfExists('check_out');
     }
 };

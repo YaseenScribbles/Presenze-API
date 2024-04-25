@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CheckIn extends Model
+class CheckOut extends Model
 {
     use HasFactory;
 
@@ -19,6 +19,6 @@ class CheckIn extends Model
 
     public $timestamps = false;
 
-    protected $table = 'check_in';
+    protected $table = 'check_out';
 
 }
