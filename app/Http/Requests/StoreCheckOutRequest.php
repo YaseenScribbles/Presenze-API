@@ -11,7 +11,7 @@ class StoreCheckOutRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreCheckOutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|integer',
+            'image' => 'image|required',
+            'location' => 'required|string',
         ];
     }
 }

@@ -18,6 +18,7 @@ class CheckInController extends Controller
     {
         $user_id = $request->query('user_id');
         $checkins = CheckIn::where('user_id','=',$user_id)
+        ->where('is_active','=',1)
         ->orderBy('created_at','desc')
         ->get();
         return response()->json([$checkins],200);
