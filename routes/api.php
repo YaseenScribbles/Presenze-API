@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckInController;
+use App\Http\Controllers\CheckOutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/checkin', [CheckInController::class, 'store']);
 Route::get('/checkin', [CheckInController::class, 'index']);
+Route::post('/checkout', [CheckOutController::class, 'store']);
+Route::get('/checkout', [CheckOutController::class, 'index']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthController::class,'logout']);
 
