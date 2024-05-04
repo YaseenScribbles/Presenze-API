@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckInController;
 use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GeocodingController;
+use App\Http\Controllers\VisitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +31,6 @@ Route::get('/checkout', [CheckOutController::class, 'index']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthController::class,'logout']);
 Route::get('/geocode',[GeocodingController::class,'geocode']);
+Route::apiResource('contacts',ContactController::class);
+Route::apiResource('visits',VisitController::class);
 
