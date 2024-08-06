@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
+use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 
 class ContactController extends Controller
@@ -13,11 +14,16 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
             //code...
-            $contacts = Contact::where('is_active', '=', 1)->paginate(10);
+            if ($request->has('all') && $request->all == 'true') {
+                # code...
+                $contacts = Contact::where('is_active', '=', 1)->get();
+            } else {
+                $contacts = Contact::where('is_active', '=', 1)->paginate(10);
+            }
             return ContactResource::collection($contacts);
         } catch (\Throwable $th) {
             //throw $th;
