@@ -30,7 +30,7 @@ class VisitController extends Controller
             where v.is_active = 1 and c.is_active = 1 and
             v.user_id = $request->user_id";
 
-            if ($request->has('search_term')) {
+            if ($request->has('search_term') && $request->search_term != '') {
                 $query .= " and c.shop_name like '%$request->search_term%'";
             }
 

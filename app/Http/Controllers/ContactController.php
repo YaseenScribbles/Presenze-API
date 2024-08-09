@@ -22,7 +22,14 @@ class ContactController extends Controller
                 # code...
                 $contacts = Contact::where('is_active', '=', 1)->get();
             } else {
-                $contacts = Contact::where('is_active', '=', 1)->paginate(10);
+                $contactsQuery = Contact::where('is_active', '=', 1);
+
+                if($request->has('search_term') && $request->search_term != ''){
+                    $contactsQuery->where('shop_name','like', '%' . $request->search_term . '%');
+                }
+
+                $contacts = $contactsQuery->paginate(10);
+
             }
             return ContactResource::collection($contacts);
         } catch (\Throwable $th) {
